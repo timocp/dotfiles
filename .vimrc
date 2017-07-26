@@ -6,23 +6,25 @@ set nocompatible
 " run :PlugInstall when making changes
 
 call plug#begin()
-Plug 'w0rp/ale'             " async lint engine
-Plug 'kien/ctrlp.vim'       " fuzzy path/buffer/tag finder
-Plug 'fatih/vim-go'         " Go development
-Plug 'tpope/vim-fugitive'   " Git
-Plug 'tpope/vim-rails'      " Ruby on rails editing
-if has('nvim')
-    Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-    Plug 'zchee/deoplete-go', { 'do': 'make' }
-    let g:deoplete#enable_at_startup = 1
-    Plug 'sebdah/vim-delve'     " go debugger
-endif
-Plug 'Shougo/neosnippet.vim'        " snippets
-Plug 'Shougo/neosnippet-snippets'   " large collection of snippets
+
 Plug 'airblade/vim-gitgutter'       " show +/-/~ in gutter
+Plug 'fatih/vim-go'                 " Go development
+Plug 'kien/ctrlp.vim'               " fuzzy path/buffer/tag finder
 Plug 'scrooloose/nerdcommenter'     " comment functions (,cc ,cu)
+Plug 'Shougo/neosnippet-snippets'   " large collection of snippets
+Plug 'Shougo/neosnippet.vim'        " snippets
+Plug 'tpope/vim-fugitive'           " Git
+Plug 'tpope/vim-rails'              " Ruby on rails editing
 Plug 'tpope/vim-surround'           " surrounding text
 Plug 'vim-airline/vim-airline'      " fancy statusline
+Plug 'w0rp/ale'                     " async lint engine
+
+if has('nvim')
+    Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+    Plug 'sebdah/vim-delve'
+    Plug 'zchee/deoplete-go', { 'do': 'make' }
+endif
+
 call plug#end()
 
 " Preferred options
@@ -110,6 +112,9 @@ let g:airline#extensions#ale#enabled = 1
 let g:ale_sign_column_always = 1
 map <Leader>n <Plug>(ale_next_wrap)
 map <Leader>p <Plug>(ale_previous_wrap)
+
+" deoplete config
+let g:deoplete#enable_at_startup = 1
 
 " Snippet config (using neosnippet)
 " --------------
