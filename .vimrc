@@ -10,6 +10,7 @@ Plug 'w0rp/ale'             " async lint engine
 Plug 'kien/ctrlp.vim'       " fuzzy path/buffer/tag finder
 Plug 'fatih/vim-go'         " Go development
 Plug 'tpope/vim-fugitive'   " Git
+Plug 'tpope/vim-rails'      " Ruby on rails editing
 if has('nvim')
     Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
     Plug 'zchee/deoplete-go', { 'do': 'make' }
