@@ -95,6 +95,9 @@ if maparg('<C-L>', 'n') ==# ''
   nnoremap <silent> <C-L> :nohlsearch<C-R>=has('diff')?'<Bar>diffupdate':''<CR><CR><C-L>
 endif
 
+" reload vimrc file
+map <Leader>~ :source ~/.vimrc<CR>
+
 " ale config
 " -----------
 " https://github.com/w0rp/ale
