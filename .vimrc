@@ -19,6 +19,7 @@ endif
 Plug 'Shougo/neosnippet.vim'        " snippets
 Plug 'Shougo/neosnippet-snippets'   " large collection of snippets
 Plug 'airblade/vim-gitgutter'       " show +/-/~ in gutter
+Plug 'scrooloose/nerdcommenter'     " comment functions (,cc ,cu)
 Plug 'vim-airline/vim-airline'      " fancy statusline
 call plug#end()
 
