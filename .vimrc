@@ -192,6 +192,10 @@ au FileType perl set sts=2 sw=2
 " --------------
 au FileType ruby set sts=2 sw=2
 
+" Language: YAML
+" --------------
+au FileType yaml set sts=2 sw=2
+
 " Load all plugins now
 packloadall
 " Load all helptags now, after plugins have been loaded
