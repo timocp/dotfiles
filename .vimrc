@@ -168,6 +168,9 @@ let g:go_highlight_types = 1
 au FileType go nmap <Leader>ga <Plug>(go-alternate-edit)
 au Filetype go nmap <Leader>gah <Plug>(go-alternate-split)
 
+" Run current program
+au FileType go nmap <F8> :GoRun<cr>
+
 " Toggle view of test coverage
 au FileType go nmap <F9> :GoCoverageToggle<cr>
 
