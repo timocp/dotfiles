@@ -132,6 +132,9 @@ let g:ale_sign_column_always = 1
 map <Leader>n <Plug>(ale_next_wrap)
 map <Leader>p <Plug>(ale_previous_wrap)
 
+" F9 to toggle linting
+nmap <F9> :ALEToggle<cr>
+
 " deoplete config
 let g:deoplete#enable_at_startup = 1
 
@@ -172,7 +175,7 @@ au Filetype go nmap <Leader>gah <Plug>(go-alternate-split)
 au FileType go nmap <F8> :GoRun<cr>
 
 " Toggle view of test coverage
-au FileType go nmap <F9> :GoCoverageToggle<cr>
+au FileType go nmap <F7> :GoCoverageToggle<cr>
 
 " run test for this file
 au FileType go nmap <F10> :GoTest<cr>
@@ -187,6 +190,9 @@ let g:go_fmt_command = "goimports"
 
 " use neosnippet for vim-go
 let g:go_snippet_engine = "neosnippet"
+
+" Language: Javascript
+au FileType javascript set sts=2 sw=2
 
 " Language: Perl
 au FileType perl set sts=2 sw=2
