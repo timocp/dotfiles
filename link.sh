@@ -13,5 +13,6 @@ for f in $(find . -type f -not -name $(basename $0) -a -not -name LICENSE | sed 
             continue
         fi
     fi
+    mkdir -p $HOME/$(dirname $f)
     ln -sfv $(pwd)/$f $HOME/$f
 done
