@@ -7,7 +7,7 @@ export ZSH="$HOME/.oh-my-zsh"
 # Set name of the theme to load. Optionally, if you set this to "random"
 # it'll load a random theme each time that oh-my-zsh is loaded.
 # See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
-ZSH_THEME="robbyrussell"
+ZSH_THEME="bira"
 
 # Set list of themes to load
 # Setting this variable when ZSH_THEME=random
@@ -62,7 +62,7 @@ ZSH_THEME="robbyrussell"
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(
-  git
+  debian
 )
 
 source $ZSH/oh-my-zsh.sh
@@ -75,11 +75,11 @@ source $ZSH/oh-my-zsh.sh
 # export LANG=en_US.UTF-8
 
 # Preferred editor for local and remote sessions
-# if [[ -n $SSH_CONNECTION ]]; then
-#   export EDITOR='vim'
-# else
-#   export EDITOR='mvim'
-# fi
+if command -v nvim &> /dev/null; then
+    export EDITOR=nvim
+else
+    export EDITOR=vim
+fi
 
 # Compilation flags
 # export ARCHFLAGS="-arch x86_64"
@@ -95,3 +95,29 @@ source $ZSH/oh-my-zsh.sh
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
+
+mkdir -p $HOME/.vim/{backup,swap}
+
+export LC_COLLATE=C
+export LESS="-aMiqRsS -j 5"
+export PAGER=less
+
+alias .rc="source ~/.zshrc"
+alias be="bundle exec"
+alias bigthings="du -sk * | sort -n"
+alias feature="git flow feature"
+alias l="/bin/ls --color=tty"
+alias la="/bin/ls -a --color=tty"
+alias ls="/bin/ls -l --color=tty"
+alias lsa="/bin/ls -la --color=tty"
+alias v=$EDITOR
+alias vrc="source ~/.zshrc"
+
+gd() {
+    git diff "$@" | gvim -c "set syntax=diff columns=82 buftype=nowrite" -
+}
+
+# get local (eg, work/home specific) aliases and other things
+if [ -e ~/.zlocal ]; then
+    source ~/.zlocal
+fi
