@@ -62,12 +62,19 @@ ZSH_THEME="bira"
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(
+  colorize
+  colored-man-pages
   debian
+  emoji-clock
+  encode64
+  git-flow-avh
 )
 
 source $ZSH/oh-my-zsh.sh
 
 # User configuration
+
+path+=($HOME/bin)
 
 # export MANPATH="/usr/local/man:$MANPATH"
 
@@ -106,16 +113,21 @@ alias .rc="source ~/.zshrc"
 alias be="bundle exec"
 alias bigthings="du -sk * | sort -n"
 alias feature="git flow feature"
+alias gg="git grep"
 alias l="/bin/ls --color=tty"
 alias la="/bin/ls -a --color=tty"
 alias ls="/bin/ls -l --color=tty"
 alias lsa="/bin/ls -la --color=tty"
 alias v=$EDITOR
-alias vrc="source ~/.zshrc"
+alias vrc="$EDITOR ~/.zshrc"
 
 gd() {
     git diff "$@" | gvim -c "set syntax=diff columns=82 buftype=nowrite" -
 }
+
+if command -v xdg-open; then
+    alias open=xdg-open
+fi
 
 # get local (eg, work/home specific) aliases and other things
 if [ -e ~/.zlocal ]; then
