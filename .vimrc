@@ -13,16 +13,17 @@ Plug 'kien/ctrlp.vim'               " fuzzy path/buffer/tag finder
 Plug 'scrooloose/nerdcommenter'     " comment functions (,cc ,cu)
 Plug 'Shougo/neosnippet-snippets'   " large collection of snippets
 Plug 'Shougo/neosnippet.vim'        " snippets
-Plug 'tpope/vim-fugitive'           " Git
+Plug 'tpope/vim-commentary'         " comments
+"Plug 'tpope/vim-fugitive'           " Git
 Plug 'tpope/vim-rails'              " Ruby on rails editing
 Plug 'tpope/vim-surround'           " surrounding text
 Plug 'vim-airline/vim-airline'      " fancy statusline
 Plug 'w0rp/ale'                     " async lint engine
 
 if has('nvim')
-    Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+    "Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
     Plug 'sebdah/vim-delve'
-    Plug 'zchee/deoplete-go', { 'do': 'make' }
+    "Plug 'zchee/deoplete-go', { 'do': 'make' }
 endif
 
 call plug#end()
@@ -135,6 +136,15 @@ map <Leader>p <Plug>(ale_previous_wrap)
 " F9 to toggle linting
 nmap <F9> :ALEToggle<cr>
 
+" Default hightlight is unlegible
+highlight ALEWarning ctermbg=DarkBlue
+
+" fixers
+let g:ale_fixers = {
+\ 'ruby': ['rubocop'],
+\}
+nmap <F8> <Plug>(ale_fix)
+
 " deoplete config
 let g:deoplete#enable_at_startup = 1
 
@@ -171,9 +181,6 @@ let g:go_highlight_types = 1
 au FileType go nmap <Leader>ga <Plug>(go-alternate-edit)
 au Filetype go nmap <Leader>gah <Plug>(go-alternate-split)
 
-" Run current program
-au FileType go nmap <F8> :GoRun<cr>
-
 " Toggle view of test coverage
 au FileType go nmap <F7> :GoCoverageToggle<cr>
 
@@ -200,6 +207,7 @@ au FileType perl set sts=2 sw=2
 " Language: Ruby
 " --------------
 au FileType ruby set sts=2 sw=2
+au FileType eruby set sts=2 sw=2
 
 " Language: YAML
 " --------------
