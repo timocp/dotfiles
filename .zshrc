@@ -125,7 +125,7 @@ gd() {
     git diff "$@" | gvim -c "set syntax=diff columns=82 buftype=nowrite" -
 }
 
-if command -v xdg-open; then
+if command -v xdg-open &> /dev/null; then
     alias open=xdg-open
 fi
 
