@@ -74,6 +74,7 @@ source $ZSH/oh-my-zsh.sh
 
 # User configuration
 
+typeset -U path
 path+=($HOME/bin)
 
 # export MANPATH="/usr/local/man:$MANPATH"
@@ -103,6 +104,8 @@ fi
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
+unsetopt share_history
+
 mkdir -p $HOME/.vim/{backup,swap}
 
 export LC_COLLATE=C
@@ -125,6 +128,10 @@ gd() {
     git diff "$@" | gvim -c "set syntax=diff columns=82 buftype=nowrite" -
 }
 
+vf() {
+    $EDITOR $(fzf)
+}
+
 if command -v xdg-open &> /dev/null; then
     alias open=xdg-open
 fi
@@ -133,3 +140,5 @@ fi
 if [ -e ~/.zlocal ]; then
     source ~/.zlocal
 fi
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh

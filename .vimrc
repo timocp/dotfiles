@@ -9,7 +9,6 @@ call plug#begin()
 
 Plug 'airblade/vim-gitgutter'       " show +/-/~ in gutter
 Plug 'fatih/vim-go'                 " Go development
-Plug 'kien/ctrlp.vim'               " fuzzy path/buffer/tag finder
 Plug 'scrooloose/nerdcommenter'     " comment functions (,cc ,cu)
 Plug 'Shougo/neosnippet-snippets'   " large collection of snippets
 Plug 'Shougo/neosnippet.vim'        " snippets
@@ -24,6 +23,14 @@ if has('nvim')
     "Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
     Plug 'sebdah/vim-delve'
     "Plug 'zchee/deoplete-go', { 'do': 'make' }
+endif
+
+if isdirectory($HOME . '/.fzf')
+    " fzf instead of ctrlp
+    set rtp+=~/.fzf
+    nmap <C-P> :FZF<CR>
+else
+    Plug 'kien/ctrlp.vim'               " fuzzy path/buffer/tag finder
 endif
 
 call plug#end()
