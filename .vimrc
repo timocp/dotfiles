@@ -148,7 +148,11 @@ nmap <F9> :ALEToggle<cr>
 highlight ALEWarning ctermbg=DarkBlue
 
 " fixers
+let g:ale_linters = {
+\ 'javascript': ['standard'],
+\}
 let g:ale_fixers = {
+\ 'javascript': ['standard'],
 \ 'ruby': ['rubocop'],
 \}
 nmap <F8> <Plug>(ale_fix)
