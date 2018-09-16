@@ -9,6 +9,7 @@ call plug#begin()
 
 Plug 'airblade/vim-gitgutter'       " show +/-/~ in gutter
 Plug 'fatih/vim-go'                 " Go development
+Plug 'Quramy/vim-js-pretty-template'
 Plug 'scrooloose/nerdcommenter'     " comment functions (,cc ,cu)
 Plug 'Shougo/neosnippet-snippets'   " large collection of snippets
 Plug 'Shougo/neosnippet.vim'        " snippets
