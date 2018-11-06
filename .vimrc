@@ -9,12 +9,13 @@ call plug#begin()
 
 Plug 'airblade/vim-gitgutter'       " show +/-/~ in gutter
 Plug 'fatih/vim-go'                 " Go development
+Plug 'fenetikm/falcon'
 Plug 'Quramy/vim-js-pretty-template'
 Plug 'scrooloose/nerdcommenter'     " comment functions (,cc ,cu)
 Plug 'Shougo/neosnippet-snippets'   " large collection of snippets
 Plug 'Shougo/neosnippet.vim'        " snippets
 Plug 'tpope/vim-commentary'         " comments
-"Plug 'tpope/vim-fugitive'           " Git
+Plug 'tpope/vim-fugitive'           " Git
 Plug 'tpope/vim-rails'              " Ruby on rails editing
 Plug 'tpope/vim-surround'           " surrounding text
 Plug 'vim-airline/vim-airline'      " fancy statusline
@@ -28,6 +29,7 @@ endif
 
 if isdirectory($HOME . '/.fzf')
     " fzf instead of ctrlp
+    Plug 'junegunn/fzf.vim'
     set rtp+=~/.fzf
     nmap <C-P> :FZF<CR>
 else
@@ -73,10 +75,20 @@ set wildmode=longest,list
 
 " More subtle color column
 set colorcolumn=80
-highlight ColorColumn ctermbg=darkblue guibg=black
+highlight ColorColumn ctermbg=darkblue guibg=darkblue
 
 " Always syntax highlight
 syntax on
+
+" Override falcon for some small things
+highlight Comment gui=italic
+
+" F2 opens explorer
+" F3 split-opens explorer
+nmap <F2> :Explore<CR>
+nmap <F3> :Sexplore<CR>
+" ; Open buffers list
+nmap ; :Buffers<CR>
 
 " misc
 " ----
@@ -130,12 +142,16 @@ endif
 " reload vimrc file
 map <Leader>~ :source ~/.vimrc<CR>
 
+" use netrw tree style listing
+let g:netrw_liststyle=3
+
 " ale config
 " -----------
 " https://github.com/w0rp/ale
 
 " Enable integration with airline.
 let g:airline#extensions#ale#enabled = 1
+let g:airline#extensions#branch#displayed_head_limit = 20
 
 let g:ale_sign_column_always = 1
 map <Leader>n <Plug>(ale_next_wrap)
@@ -144,8 +160,9 @@ map <Leader>p <Plug>(ale_previous_wrap)
 " F9 to toggle linting
 nmap <F9> :ALEToggle<cr>
 
-" Default hightlight is unlegible
-highlight ALEWarning ctermbg=DarkBlue
+" Default highlight is unlegible, and I don't like falcon's underlines
+highlight ALEWarning ctermbg=DarkBlue guibg=#330000
+highlight ALEError ctermbg=DarkBlue guibg=#660000
 
 " fixers
 let g:ale_linters = {
