@@ -117,6 +117,7 @@ alias be="bundle exec"
 alias bigthings="du -sk * | sort -n"
 alias feature="git flow feature"
 alias gg="git grep"
+alias gs="git status"
 alias l="/bin/ls --color=tty"
 alias la="/bin/ls -a --color=tty"
 alias ls="/bin/ls -l --color=tty"
@@ -130,6 +131,14 @@ gd() {
 
 vf() {
     $EDITOR $(fzf)
+}
+
+# git grep -> fzf -> open selection
+ggvim() {
+    choice=$(gg "$@" | fzf -0 -1 --ansi --preview "cat {-1}")
+    if [ ! -z "$choice" ]; then
+        echo $EDITOR $choice
+    fi
 }
 
 if command -v xdg-open &> /dev/null; then
