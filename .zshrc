@@ -125,6 +125,20 @@ alias lsa="/bin/ls -laN --color=tty"
 alias v=$EDITOR
 alias vrc="$EDITOR ~/.zshrc"
 
+sshaws() {
+    key=$HOME/.keys/$1.pem
+    if [ -e $key ]; then
+        echo "Finding $1 by tags..."
+        instance_id=$(aws ec2 describe-tags | jq -r '.Tags[] | select(.Value=="'$1'").ResourceId')
+        echo "Instance ID is $instance_id"
+        public_dns_name=$(aws ec2 describe-instances --instance-id $instance_id | jq -r '.Reservations[0].Instances[0].PublicDnsName')
+        echo "Public DNS is $public_dns_name"
+        ssh -i $key ubuntu@$public_dns_name
+    else
+        echo "$key is missing"
+    fi
+}
+
 gd() {
     git diff "$@" | gvim -c "set syntax=diff columns=82 buftype=nowrite" -
 }
