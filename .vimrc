@@ -7,13 +7,14 @@ set nocompatible
 
 call plug#begin()
 
+Plug 'Quramy/vim-js-pretty-template'
+Plug 'Shougo/neosnippet-snippets'   " large collection of snippets
+Plug 'Shougo/neosnippet.vim'        " snippets
 Plug 'airblade/vim-gitgutter'       " show +/-/~ in gutter
 Plug 'fatih/vim-go'                 " Go development
 Plug 'fenetikm/falcon'
-Plug 'Quramy/vim-js-pretty-template'
+Plug 'mhinz/vim-grepper'
 Plug 'scrooloose/nerdcommenter'     " comment functions (,cc ,cu)
-Plug 'Shougo/neosnippet-snippets'   " large collection of snippets
-Plug 'Shougo/neosnippet.vim'        " snippets
 Plug 'tpope/vim-commentary'         " comments
 Plug 'tpope/vim-fugitive'           " Git
 Plug 'tpope/vim-rails'              " Ruby on rails editing
@@ -68,6 +69,7 @@ set showmatch
 set smartindent
 set softtabstop=4
 set splitbelow
+set termguicolors
 set viminfo='20,\"50
 set visualbell
 set wildmenu
@@ -92,6 +94,7 @@ nmap ; :Buffers<CR>
 
 " misc
 " ----
+
 
 if has('mouse')
     " enable mouse in all modes
@@ -145,9 +148,18 @@ map <Leader>~ :source ~/.vimrc<CR>
 " use netrw tree style listing
 let g:netrw_liststyle=3
 
+" delete hidden netrw buffers
+autocmd FileType netrw setl bufhidden=delete
+
 " ale config
 " -----------
 " https://github.com/w0rp/ale
+
+" aliases by filetype (TODO: not working?)
+let g:ale_linter_alias = {
+    \ 'xsd': ['xml'],
+    \ 'xslt': ['xml']
+    \ }
 
 " Enable integration with airline.
 let g:airline#extensions#ale#enabled = 1
@@ -179,9 +191,9 @@ let g:deoplete#enable_at_startup = 1
 
 " Snippet config (using neosnippet)
 " --------------
-imap <C-k> <Plug>(neosnippet_expand_or_jump)
-smap <C-k> <Plug>(neosnippet_expand_or_jump)
-xmap <C-k> <Plug>(neosnippet_expand_target)
+" imap <C-k> <Plug>(neosnippet_expand_or_jump)
+" smap <C-k> <Plug>(neosnippet_expand_or_jump)
+" xmap <C-k> <Plug>(neosnippet_expand_target)
 
 " Language: C
 " -----------
@@ -237,6 +249,13 @@ au FileType perl set sts=2 sw=2
 " --------------
 au FileType ruby set sts=2 sw=2
 au FileType eruby set sts=2 sw=2
+
+" macro @s converts old hash syntax to new
+au FileType ruby let @s='xeplxxx'
+au FileType eruby let @s='xeplxxx'
+" macro @t converts single quotes to double (as long as no internal quotes)
+au FileType ruby let @t='r"f''r"'
+au FileType eruby let @t='r"f''r"'
 
 " Language: YAML
 " --------------

@@ -17,7 +17,7 @@ ZSH_THEME="bira"
 # ZSH_THEME_RANDOM_CANDIDATES=( "robbyrussell" "agnoster" )
 
 # Uncomment the following line to use case-sensitive completion.
-# CASE_SENSITIVE="true"
+CASE_SENSITIVE="true"
 
 # Uncomment the following line to use hyphen-insensitive completion. Case
 # sensitive completion must be off. _ and - will be interchangeable.
@@ -118,10 +118,10 @@ alias bigthings="du -sk * | sort -n"
 alias feature="git flow feature"
 alias gg="git grep"
 alias gs="git status"
-alias l="/bin/ls --color=tty"
-alias la="/bin/ls -a --color=tty"
-alias ls="/bin/ls -l --color=tty"
-alias lsa="/bin/ls -la --color=tty"
+alias l="/bin/ls -N --color=tty"
+alias la="/bin/ls -aN --color=tty"
+alias ls="/bin/ls -lN --color=tty"
+alias lsa="/bin/ls -laN --color=tty"
 alias v=$EDITOR
 alias vrc="$EDITOR ~/.zshrc"
 
@@ -150,4 +150,6 @@ if [ -e ~/.zlocal ]; then
     source ~/.zlocal
 fi
 
+# Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
+export PATH="$PATH:$HOME/.rvm/bin"
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
