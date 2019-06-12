@@ -116,6 +116,7 @@ alias .rc="source ~/.zshrc"
 alias be="bundle exec"
 alias bigthings="du -sk * | sort -n"
 alias feature="git flow feature"
+alias ga="git add"
 alias gb="git blame"
 alias gdc="gd --cached"
 alias gg="git grep"
@@ -142,7 +143,7 @@ sshaws() {
 }
 
 gd() {
-    git diff "$@" | gvim -c "set syntax=diff columns=82 buftype=nowrite" -
+    git diff "$@" | gvim -c "set syntax=diff columns=122 buftype=nowrite" -
 }
 
 vf() {

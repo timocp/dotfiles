@@ -92,9 +92,11 @@ nmap <F3> :Sexplore<CR>
 " ; Open buffers list
 nmap ; :Buffers<CR>
 
+" don't ask
+nmap <F12> :!pkill -9 ruby2.3<CR>
+
 " misc
 " ----
-
 
 if has('mouse')
     " enable mouse in all modes
