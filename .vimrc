@@ -178,10 +178,10 @@ highlight ALEError ctermbg=DarkBlue guibg=#660000
 
 " fixers
 let g:ale_linters = {
-\ 'javascript': ['standard'],
+\ 'javascript': ['eslint'],
 \}
 let g:ale_fixers = {
-\ 'javascript': ['standard'],
+\ 'javascript': ['eslint'],
 \ 'ruby': ['rubocop'],
 \}
 nmap <F8> <Plug>(ale_fix)
