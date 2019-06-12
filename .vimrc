@@ -129,7 +129,7 @@ endif
 let mapleader = ","
 
 " remove trailing writespace on :w
-au BufWritePre * :%s/\s\+$//e
+au BufWritePre *.rb,*.erb :%s/\s\+$//e
 
 " wrap text
 map Q gq
