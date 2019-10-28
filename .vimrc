@@ -14,6 +14,8 @@ Plug 'airblade/vim-gitgutter'       " show +/-/~ in gutter
 Plug 'fatih/vim-go'                 " Go development
 Plug 'fenetikm/falcon'
 Plug 'mhinz/vim-grepper'
+Plug 'racer-rust/vim-racer'         " rust code completion
+Plug 'rust-lang/rust.vim'
 Plug 'scrooloose/nerdcommenter'     " comment functions (,cc ,cu)
 Plug 'tpope/vim-commentary'         " comments
 Plug 'tpope/vim-fugitive'           " Git
@@ -23,9 +25,7 @@ Plug 'vim-airline/vim-airline'      " fancy statusline
 Plug 'w0rp/ale'                     " async lint engine
 
 if has('nvim')
-    "Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
     Plug 'sebdah/vim-delve'
-    "Plug 'zchee/deoplete-go', { 'do': 'make' }
 endif
 
 if isdirectory($HOME . '/.fzf')
@@ -258,6 +258,10 @@ au FileType eruby let @s='xeplxxx'
 " macro @t converts single quotes to double (as long as no internal quotes)
 au FileType ruby let @t='r"f''r"'
 au FileType eruby let @t='r"f''r"'
+
+" Language: Rust
+" --------------
+let g:rustfmt_autosave = 1
 
 " Language: YAML
 " --------------
