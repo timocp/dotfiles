@@ -1,0 +1,149 @@
+#! /usr/bin/env ruby
+#
+# Report difference between time worked and time logged.
+#
+# usage:
+# redmine-time [options]
+#
+# options:
+#   --start HH:MM
+#     specify start time (eg "8:15").  if this option is missing, the
+#     xscreensaver log is used to determine when the screen was first unlocked.
+#     if the log is missing, we assume 8:30 start time.
+#
+#   --lunch MINS
+#     specify how long has been spent at lunch.  if this option is missing,
+#     we assume 12:00 to 12:30 is/was spent at lunch.
+
+require "json"
+require "optparse"
+require "pry"
+require "rest-client"
+
+class TimeManager
+  def initialize
+    @start = nil
+    @lunch = nil
+    @redmine_client = nil
+  end
+
+  attr_accessor :redmine_client
+
+  def start=(start)
+    if (m = start.match(/^(\d?\d):(\d\d)$/))
+      @start = m[1].to_i + m[2].to_i / 60.0
+    else
+      raise "Invalid start time #{start.inspect} expected HH:MM"
+    end
+  end
+
+  def start
+    @start ||= fetch_start_time
+  end
+
+  def lunch=(lunch)
+    @lunch = lunch.to_f if lunch
+  end
+
+  def now
+    Time.now.hour + Time.now.min / 60.0
+  end
+
+  def lunch
+    if @lunch
+      @lunch
+    elsif now < 12.0
+      0.0
+    elsif now < 12.5
+      now - 12
+    else
+      0.5
+    end
+  end
+
+  def spent
+    now - start - lunch
+  end
+
+  def logged
+    @logged ||= fetch_logged_time
+  end
+
+  def missing
+    spent - logged
+  end
+
+  def fetch_logged_time
+    hours = 0
+    @redmine_client.each_time_entry do |entry|
+      warn "Spent #{entry["hours"]} hours #{entry["activity"]["name"]} on ##{entry["issue"]["id"]} - #{entry["issue"]["subject"]}"
+      hours += entry["hours"]
+    end
+    hours
+  end
+
+  def fetch_start_time
+    File.open("#{ENV['HOME']}/.xscreensaver.log").each_line do |line|
+      if line.start_with?("UNBLANK")
+        unlock = Time.parse(line[8..-1])
+        if unlock.to_date == Date.today
+          warn "Unlocked screen at #{unlock.strftime("%l:%M%P").strip}"
+          return unlock.hour + unlock.min / 60.0
+        end
+      end
+    end
+    warn "No screensaver unlock found, assuming 8:30am start"
+    8.5
+  end
+end
+
+class RedmineClient
+  def initialize
+    @host = ENV.fetch("REDMINE_HOST")
+    @key = ENV.fetch("REDMINE_KEY")
+    @user_id = ENV.fetch("REDMINE_USER_ID")
+    @issue_cache = {}
+  end
+
+  # note i did try to fetch all the issues in one query, but
+  # /issues.json?issue_id=1,2,3 doesn't seem to work on our instance...
+  def each_time_entry(date = Date.today)
+    res = RestClient.get(redmine_url("time_entries.json", spent_on: Date.today, limit: 100))
+    JSON.parse(res.body)["time_entries"].each do |entry|
+      issue_id = entry["issue"]["id"]
+      @issue_cache[issue_id] = fetch_issue(issue_id) if !@issue_cache.key?(issue_id)
+      entry["issue"] = @issue_cache[issue_id]
+      yield entry
+    end
+  end
+
+  def fetch_issue(issue_id)
+    JSON.parse(RestClient.get(redmine_url("issues/#{issue_id}.json")).body)["issue"]
+  end
+
+  private
+
+  def redmine_url(resource, params = {})
+    URI::HTTP.build(
+      host: @host,
+      path: "/#{resource}",
+      query: URI.encode_www_form(params.merge(key: @key, user_id: @user_id))
+    ).to_s
+  end
+end
+
+TimeManager.new.tap do |tm|
+  tm.redmine_client = RedmineClient.new
+  OptionParser.new do |opts|
+    opts.banner = "Usage: #{$0} [options]"
+    opts.on("--start HH:MM", "Specify start time (HH:MM)") do |time|
+      tm.start = time
+    end
+    opts.on("--lunch MINS", "Specify how many minutes were spent at lunch") do |mins|
+      tm.lunch = mins.to_f / 60
+    end
+  end.parse!
+  puts "I've been working for #{tm.spent.round(1)} hours"
+  puts "#{tm.logged.round(1)} hours have already been logged"
+  puts "#{tm.missing.round(1)} hours are missing from log" if tm.missing >= 0.1
+end
