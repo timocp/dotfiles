@@ -129,14 +129,14 @@ alias v=$EDITOR
 alias vrc="$EDITOR ~/.zshrc"
 
 sshaws() {
-    key=$HOME/.keys/$1.pem
+    key=$HOME/.ssh/keys/$1.pem
     if [ -e $key ]; then
         echo "Finding $1 by tags..."
         instance_id=$(aws ec2 describe-tags | jq -r '.Tags[] | select(.Key=="Name" and .ResourceType=="instance" and .Value=="'$1'").ResourceId')
         echo "Instance ID is $instance_id"
         public_dns_name=$(aws ec2 describe-instances --instance-id $instance_id | jq -r '.Reservations[0].Instances[0].PublicDnsName')
         echo "Public DNS is $public_dns_name"
-        ssh -i $key ubuntu@$public_dns_name
+        ssh -A -i $key ubuntu@$public_dns_name
     else
         echo "$key is missing"
     fi
