@@ -10,10 +10,10 @@ call plug#begin()
 Plug 'Quramy/vim-js-pretty-template'
 Plug 'Shougo/neosnippet-snippets'   " large collection of snippets
 Plug 'Shougo/neosnippet.vim'        " snippets
-Plug 'airblade/vim-gitgutter'       " show +/-/~ in gutter
 Plug 'fatih/vim-go'                 " Go development
 Plug 'fenetikm/falcon'
 Plug 'mhinz/vim-grepper'
+Plug 'mhinz/vim-signify'            " vcs changes in gutter
 Plug 'racer-rust/vim-racer'         " rust code completion
 Plug 'rust-lang/rust.vim'
 Plug 'scrooloose/nerdcommenter'     " comment functions (,cc ,cu)
