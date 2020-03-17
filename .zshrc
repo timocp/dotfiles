@@ -163,6 +163,9 @@ if command -v xdg-open &> /dev/null; then
     alias open=xdg-open
 fi
 
+# Use broot if present
+[ -f ~/.config/broot/launcher/bash/br ] && source /home/tim/.config/broot/launcher/bash/br
+
 # get local (eg, work/home specific) aliases and other things
 if [ -e ~/.zlocal ]; then
     source ~/.zlocal
