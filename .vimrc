@@ -96,7 +96,7 @@ nmap ; :Buffers<CR>
 nmap <F6> :exe "!gitk " . shellescape(expand("%")) . " &"<CR>
 
 " don't ask
-nmap <F12> :!pkill -9 ruby2.3<CR>
+nmap <F12> :!pkill -9 ruby2.4<CR>
 
 " misc
 " ----
