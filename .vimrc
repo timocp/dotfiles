@@ -76,7 +76,7 @@ set wildmenu
 set wildmode=longest,list
 
 " More subtle color column
-set colorcolumn=80
+set colorcolumn=80,120
 highlight ColorColumn ctermbg=darkblue guibg=darkblue
 
 " Always syntax highlight
