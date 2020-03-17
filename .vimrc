@@ -92,6 +92,9 @@ nmap <F3> :Sexplore<CR>
 " ; Open buffers list
 nmap ; :Buffers<CR>
 
+" Open gitk on the current file
+nmap <F6> :exe "!gitk " . shellescape(expand("%")) . " &"<CR>
+
 " don't ask
 nmap <F12> :!pkill -9 ruby2.3<CR>
 
@@ -146,6 +149,9 @@ endif
 
 " reload vimrc file
 map <Leader>~ :source ~/.vimrc<CR>
+
+" split into a git blame
+map <Leader>b :Gblame<CR>
 
 " use netrw tree style listing
 let g:netrw_liststyle=3
