@@ -143,6 +143,9 @@ sshaws() {
     fi
 }
 
+# git aliases
+git config --global alias.co "checkout"
+
 gd() {
     git diff "$@" | gvim -c "set syntax=diff columns=122 buftype=nowrite" -
 }
