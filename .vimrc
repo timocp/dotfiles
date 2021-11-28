@@ -248,6 +248,7 @@ let g:go_fmt_command = "goimports"
 let g:go_snippet_engine = "neosnippet"
 
 " Language: Javascript
+autocmd BufRead,BufNewFile *.es6 set filetype=javascript
 au FileType javascript set sts=2 sw=2
 
 " Language: Perl
@@ -257,6 +258,8 @@ au FileType perl set sts=2 sw=2
 " --------------
 au FileType ruby set sts=2 sw=2
 au FileType eruby set sts=2 sw=2
+au FileType ruby setlocal spell
+au FileType eruby setlocal spell
 
 " macro @s converts old hash syntax to new
 au FileType ruby let @s='xeplxxx'
