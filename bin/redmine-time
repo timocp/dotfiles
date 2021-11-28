@@ -17,7 +17,6 @@
 
 require "json"
 require "optparse"
-require "pry"
 require "rest-client"
 
 class TimeManager
@@ -73,6 +72,10 @@ class TimeManager
     spent - logged
   end
 
+  def hometime
+    Time.now + ((8 - spent) * 60 * 60)
+  end
+
   def fetch_logged_time
     hours = 0
     @redmine_client.each_time_entry do |entry|
@@ -83,6 +86,12 @@ class TimeManager
   end
 
   def fetch_start_time
+    # If computer was booted this morning, use that time
+    if (mtime = File::Stat.new("/proc/1").mtime).to_date == Date.today
+      warn "Turned computer on at #{File::Stat.new("/proc/1").mtime.strftime("%l:%M%P").strip}"
+      return mtime.hour + mtime.min / 60.0
+    end
+
     File.open("#{ENV['HOME']}/.xscreensaver.log").each_line do |line|
       if line.start_with?("UNBLANK")
         unlock = Time.parse(line[8..-1])
@@ -145,5 +154,10 @@ TimeManager.new.tap do |tm|
   end.parse!
   puts "I've been working for #{tm.spent.round(1)} hours"
   puts "#{tm.logged.round(1)} hours have already been logged"
-  puts "#{tm.missing.round(1)} hours are missing from log" if tm.missing >= 0.1
+  puts "#{tm.missing.round(1)} hours are missing from log" if tm.missing >= 0.01
+  if tm.spent > 8.0
+    puts "Woohoo!  Home time!"
+  else
+    puts "Estimated home time is #{tm.hometime.strftime("%l:%M%P").strip}"
+  end
 end
