@@ -121,6 +121,7 @@ alias gb="git blame"
 alias gdc="gd --cached"
 alias gg="git grep"
 alias gs="git status"
+alias git-snap="git stash store $(git stash create)"
 alias l="/bin/ls -N --color=tty"
 alias la="/bin/ls -aN --color=tty"
 alias ls="/bin/ls -lN --color=tty"
@@ -146,6 +147,9 @@ sshaws() {
     fi
 }
 
+# git aliases
+git config --global alias.co "checkout"
+
 gd() {
     git diff "$@" | gvim -c "set syntax=diff columns=122 buftype=nowrite" -
 }
@@ -165,6 +169,9 @@ ggvim() {
 if command -v xdg-open &> /dev/null; then
     alias open=xdg-open
 fi
+
+# Use broot if present
+[ -f ~/.config/broot/launcher/bash/br ] && source /home/tim/.config/broot/launcher/bash/br
 
 # get local (eg, work/home specific) aliases and other things
 if [ -e ~/.zlocal ]; then

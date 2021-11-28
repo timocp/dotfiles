@@ -10,10 +10,10 @@ call plug#begin()
 Plug 'Quramy/vim-js-pretty-template'
 Plug 'Shougo/neosnippet-snippets'   " large collection of snippets
 Plug 'Shougo/neosnippet.vim'        " snippets
-Plug 'airblade/vim-gitgutter'       " show +/-/~ in gutter
 Plug 'fatih/vim-go'                 " Go development
 Plug 'fenetikm/falcon'
 Plug 'mhinz/vim-grepper'
+Plug 'mhinz/vim-signify'            " vcs changes in gutter
 Plug 'racer-rust/vim-racer'         " rust code completion
 Plug 'rust-lang/rust.vim'
 Plug 'scrooloose/nerdcommenter'     " comment functions (,cc ,cu)
@@ -76,7 +76,7 @@ set wildmenu
 set wildmode=longest,list
 
 " More subtle color column
-set colorcolumn=80
+set colorcolumn=80,120
 highlight ColorColumn ctermbg=darkblue guibg=darkblue
 
 " Always syntax highlight
@@ -92,8 +92,11 @@ nmap <F3> :Sexplore<CR>
 " ; Open buffers list
 nmap ; :Buffers<CR>
 
+" Open gitk on the current file
+nmap <F6> :exe "!gitk " . shellescape(expand("%")) . " &"<CR>
+
 " don't ask
-nmap <F12> :!pkill -9 ruby2.3<CR>
+nmap <F12> :!pkill -9 ruby2.4<CR>
 
 " misc
 " ----
@@ -146,6 +149,9 @@ endif
 
 " reload vimrc file
 map <Leader>~ :source ~/.vimrc<CR>
+
+" split into a git blame
+map <Leader>b :Gblame<CR>
 
 " use netrw tree style listing
 let g:netrw_liststyle=3
