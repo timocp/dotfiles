@@ -66,6 +66,7 @@ set scrolloff=3
 set shiftwidth=4
 set shortmess=aI
 set showmatch
+set signcolumn=yes
 set smartindent
 set softtabstop=4
 set splitbelow
