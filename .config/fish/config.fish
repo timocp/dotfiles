@@ -17,7 +17,6 @@ end
 
 # Aliases & Functions
 # -------------------
-alias .rc="source ~/.config/fish/config.fish"
 alias be="bundle exec"
 alias bigthings="du -sk * | sort -n"
 alias ga="git add -p"
@@ -28,6 +27,12 @@ alias l="ls"
 alias v="$EDITOR"
 alias vnc="vncserver -geometry 1366x768 -SecurityTypes X509Vnc :1"
 alias vrc="$EDITOR ~/.config/fish/config.fish"
+alias vlocal="$EDITOR ~/.config/fish/local.fish"
+
+function .rc
+    source ~/.config/fish/config.fish
+    source ~/.config/fish/conf.d/local.fish
+end
 
 function gd -d "Git diff into gvim"
   git diff $argv | gvim -c "set syntax=diff columns=122 buftype=nowrite" -
