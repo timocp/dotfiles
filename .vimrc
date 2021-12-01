@@ -10,6 +10,7 @@ call plug#begin()
 Plug 'Quramy/vim-js-pretty-template'
 Plug 'Shougo/neosnippet-snippets'   " large collection of snippets
 Plug 'Shougo/neosnippet.vim'        " snippets
+Plug 'dag/vim-fish'
 Plug 'fatih/vim-go'                 " Go development
 Plug 'fenetikm/falcon'
 Plug 'mhinz/vim-grepper'
