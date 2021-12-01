@@ -27,7 +27,7 @@ alias l="ls"
 alias v="$EDITOR"
 alias vnc="vncserver -geometry 1366x768 -SecurityTypes X509Vnc :1"
 alias vrc="$EDITOR ~/.config/fish/config.fish"
-alias vlocal="$EDITOR ~/.config/fish/local.fish"
+alias vlocal="$EDITOR ~/.config/fish/conf.d/local.fish"
 
 function .rc
     source ~/.config/fish/config.fish
