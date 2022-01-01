@@ -153,7 +153,7 @@ endif
 map <Leader>~ :source ~/.vimrc<CR>
 
 " split into a git blame
-map <Leader>b :Gblame<CR>
+map <Leader>b :Git blame<CR>
 
 " use netrw tree style listing
 let g:netrw_liststyle=3
