@@ -273,6 +273,7 @@ au FileType eruby let @t='r"f''r"'
 " Language: Rust
 " --------------
 let g:rustfmt_autosave = 1
+"let g:ale_rust_cargo_use_clippy = 1     why can't i use both...?
 
 " Language: YAML
 " --------------

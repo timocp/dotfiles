@@ -1,7 +1,12 @@
 # Shell Stuff
 set fish_greeting
 
+set -l cargo_bin ~/.cargo/bin
+
 contains /usr/sbin $fish_user_paths; or set -Ua fish_user_paths /usr/sbin
+if test -d $cargo_bin
+    contains $cargo_bin $fish_user_paths; or set -Ua fish_user_paths $cargo_bin
+end
 
 # Environment Variables
 # ---------------------
