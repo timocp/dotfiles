@@ -36,7 +36,9 @@ alias vlocal="$EDITOR ~/.config/fish/conf.d/local.fish"
 
 function .rc
     source ~/.config/fish/config.fish
-    source ~/.config/fish/conf.d/local.fish
+    if test -e ~/.config/fish/conf.d/local.fish
+        source ~/.config/fish/conf.d/local.fish
+    end
 end
 
 function gd -d "Git diff into gvim"
