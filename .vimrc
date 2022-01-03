@@ -85,7 +85,8 @@ highlight ColorColumn ctermbg=darkblue guibg=darkblue
 syntax on
 
 " Override falcon for some small things
-highlight Comment gui=italic
+colorscheme falcon
+"highlight Comment gui=italic
 
 " F2 opens explorer
 " F3 split-opens explorer
