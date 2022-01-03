@@ -126,20 +126,24 @@ alias l="/bin/ls -N --color=tty"
 alias la="/bin/ls -aN --color=tty"
 alias ls="/bin/ls -lN --color=tty"
 alias lsa="/bin/ls -laN --color=tty"
+alias runningvms="VBoxManage list runningvms"
 alias v=$EDITOR
 alias vrc="$EDITOR ~/.zshrc"
 
 sshaws() {
-    key=$HOME/.ssh/keys/$1.pem
-    if [ -e $key ]; then
-        echo "Finding $1 by tags..."
-        instance_id=$(aws ec2 describe-tags | jq -r '.Tags[] | select(.Key=="Name" and .ResourceType=="instance" and .Value=="'$1'").ResourceId')
-        echo "Instance ID is $instance_id"
-        public_dns_name=$(aws ec2 describe-instances --instance-id $instance_id | jq -r '.Reservations[0].Instances[0].PublicDnsName')
-        echo "Public DNS is $public_dns_name"
+    name=$1
+    key=$(find ~/.ssh/aws -name $name.pem)
+    if [ ! -z "$key" ]; then
+        region=$(basename $(dirname $key))
+        echo "Key: $key"
+        echo "Region: $region"
+        instance_id=$(aws --region $region ec2 describe-tags | jq -r '.Tags[] | select(.Key=="Name" and .ResourceType=="instance" and .Value=="'$name'").ResourceId')
+        echo "Instance ID: $instance_id"
+        public_dns_name=$(aws --region $region ec2 describe-instances --instance-id $instance_id | jq -r '.Reservations[0].Instances[0].PublicDnsName')
+        echo "Public DNS Name: $public_dns_name"
         ssh -A -i $key ubuntu@$public_dns_name
     else
-        echo "$key is missing"
+        echo "Couln't find a key for $name in ~/.ssh/aws"
     fi
 }
 

@@ -10,11 +10,11 @@ call plug#begin()
 Plug 'Quramy/vim-js-pretty-template'
 Plug 'Shougo/neosnippet-snippets'   " large collection of snippets
 Plug 'Shougo/neosnippet.vim'        " snippets
+Plug 'dag/vim-fish'
 Plug 'fatih/vim-go'                 " Go development
 Plug 'fenetikm/falcon'
 Plug 'mhinz/vim-grepper'
 Plug 'mhinz/vim-signify'            " vcs changes in gutter
-Plug 'racer-rust/vim-racer'         " rust code completion
 Plug 'rust-lang/rust.vim'
 Plug 'scrooloose/nerdcommenter'     " comment functions (,cc ,cu)
 Plug 'tpope/vim-commentary'         " comments
@@ -26,6 +26,7 @@ Plug 'w0rp/ale'                     " async lint engine
 
 if has('nvim')
     Plug 'sebdah/vim-delve'
+    Plug 'neovim/nvim-lspconfig'
 endif
 
 if isdirectory($HOME . '/.fzf')
@@ -66,6 +67,7 @@ set scrolloff=3
 set shiftwidth=4
 set shortmess=aI
 set showmatch
+set signcolumn=yes
 set smartindent
 set softtabstop=4
 set splitbelow
@@ -83,7 +85,8 @@ highlight ColorColumn ctermbg=darkblue guibg=darkblue
 syntax on
 
 " Override falcon for some small things
-highlight Comment gui=italic
+colorscheme falcon
+"highlight Comment gui=italic
 
 " F2 opens explorer
 " F3 split-opens explorer
@@ -151,7 +154,7 @@ endif
 map <Leader>~ :source ~/.vimrc<CR>
 
 " split into a git blame
-map <Leader>b :Gblame<CR>
+map <Leader>b :Git blame<CR>
 
 " use netrw tree style listing
 let g:netrw_liststyle=3
@@ -248,6 +251,7 @@ let g:go_fmt_command = "goimports"
 let g:go_snippet_engine = "neosnippet"
 
 " Language: Javascript
+autocmd BufRead,BufNewFile *.es6 set filetype=javascript
 au FileType javascript set sts=2 sw=2
 
 " Language: Perl
@@ -257,6 +261,8 @@ au FileType perl set sts=2 sw=2
 " --------------
 au FileType ruby set sts=2 sw=2
 au FileType eruby set sts=2 sw=2
+au FileType ruby setlocal spell
+au FileType eruby setlocal spell
 
 " macro @s converts old hash syntax to new
 au FileType ruby let @s='xeplxxx'
@@ -268,6 +274,57 @@ au FileType eruby let @t='r"f''r"'
 " Language: Rust
 " --------------
 let g:rustfmt_autosave = 1
+"let g:ale_rust_cargo_use_clippy = 1     why can't i use both...?
+
+if has('nvim')
+lua <<EOF
+local nvim_lsp = require('lspconfig')
+
+-- Use an on_attach function to only map the following keys
+-- after the language server attaches to the current buffer
+local on_attach = function(client, bufnr)
+  local function buf_set_keymap(...) vim.api.nvim_buf_set_keymap(bufnr, ...) end
+  local function buf_set_option(...) vim.api.nvim_buf_set_option(bufnr, ...) end
+
+  -- Enable completion triggered by <c-x><c-o>
+  buf_set_option('omnifunc', 'v:lua.vim.lsp.omnifunc')
+
+  -- Mappings.
+  local opts = { noremap=true, silent=true }
+
+  -- See `:help vim.lsp.*` for documentation on any of the below functions
+  buf_set_keymap('n', 'gD', '<cmd>lua vim.lsp.buf.declaration()<CR>', opts)
+  buf_set_keymap('n', 'gd', '<cmd>lua vim.lsp.buf.definition()<CR>', opts)
+  buf_set_keymap('n', 'K', '<cmd>lua vim.lsp.buf.hover()<CR>', opts)
+  buf_set_keymap('n', 'gi', '<cmd>lua vim.lsp.buf.implementation()<CR>', opts)
+  buf_set_keymap('n', '<C-k>', '<cmd>lua vim.lsp.buf.signature_help()<CR>', opts)
+  buf_set_keymap('n', '<space>wa', '<cmd>lua vim.lsp.buf.add_workspace_folder()<CR>', opts)
+  buf_set_keymap('n', '<space>wr', '<cmd>lua vim.lsp.buf.remove_workspace_folder()<CR>', opts)
+  buf_set_keymap('n', '<space>wl', '<cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>', opts)
+  buf_set_keymap('n', '<space>D', '<cmd>lua vim.lsp.buf.type_definition()<CR>', opts)
+  buf_set_keymap('n', '<space>rn', '<cmd>lua vim.lsp.buf.rename()<CR>', opts)
+  buf_set_keymap('n', '<space>ca', '<cmd>lua vim.lsp.buf.code_action()<CR>', opts)
+  buf_set_keymap('n', 'gr', '<cmd>lua vim.lsp.buf.references()<CR>', opts)
+  buf_set_keymap('n', '<space>e', '<cmd>lua vim.diagnostic.open_float()<CR>', opts)
+  buf_set_keymap('n', '[d', '<cmd>lua vim.diagnostic.goto_prev()<CR>', opts)
+  buf_set_keymap('n', ']d', '<cmd>lua vim.diagnostic.goto_next()<CR>', opts)
+  buf_set_keymap('n', '<space>q', '<cmd>lua vim.diagnostic.setloclist()<CR>', opts)
+  buf_set_keymap('n', '<space>f', '<cmd>lua vim.lsp.buf.formatting()<CR>', opts)
+end
+
+-- Use a loop to conveniently call 'setup' on multiple servers and
+-- map buffer local keybindings when the language server attaches
+local servers = { 'pyright', 'rust_analyzer', 'tsserver' }
+for _, lsp in ipairs(servers) do
+  nvim_lsp[lsp].setup {
+    on_attach = on_attach,
+    flags = {
+      debounce_text_changes = 150,
+    }
+  }
+end
+EOF
+endif
 
 " Language: YAML
 " --------------
