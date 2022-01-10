@@ -41,8 +41,9 @@ function .rc
     end
 end
 
-function gd -d "Git diff into gvim"
-  git diff $argv | gvim -c "set syntax=diff columns=122 buftype=nowrite" -
+function gd -d "Git diff"
+  gitk &
+  disown
 end
 
 # Other setup
