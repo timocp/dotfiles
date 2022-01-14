@@ -176,6 +176,9 @@ let g:ale_linter_alias = {
 let g:airline#extensions#ale#enabled = 1
 let g:airline#extensions#branch#displayed_head_limit = 20
 
+let g:ale_ruby_rubocop_executable = 'bundle'
+let g:ale_eruby_ruumba_executable = 'bundle'
+
 let g:ale_sign_column_always = 1
 map <Leader>n <Plug>(ale_next_wrap)
 map <Leader>p <Plug>(ale_previous_wrap)
