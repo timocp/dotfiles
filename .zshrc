@@ -118,7 +118,8 @@ alias bigthings="du -sk * | sort -n"
 alias feature="git flow feature"
 alias ga="git add"
 alias gb="git blame"
-alias gdc="gd --cached"
+alias gd="gitk &|"
+alias gdc="git diff --cached"
 alias gg="git grep"
 alias gs="git status"
 alias git-snap='git stash store $(git stash create)'
@@ -149,10 +150,6 @@ sshaws() {
 
 # git aliases
 git config --global alias.co "checkout"
-
-gd() {
-    git diff "$@" | gvim -c "set syntax=diff columns=122 buftype=nowrite" -
-}
 
 vf() {
     $EDITOR $(fzf)
