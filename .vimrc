@@ -14,6 +14,7 @@ Plug 'Shougo/neosnippet.vim'        " snippets
 Plug 'dag/vim-fish'
 Plug 'fatih/vim-go'                 " Go development
 Plug 'fenetikm/falcon'
+Plug 'knsh14/vim-github-link'
 Plug 'mhinz/vim-grepper'
 Plug 'mhinz/vim-signify'            " vcs changes in gutter
 Plug 'rust-lang/rust.vim'
