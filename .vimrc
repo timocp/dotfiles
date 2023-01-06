@@ -7,6 +7,7 @@ set nocompatible
 
 call plug#begin()
 
+Plug 'Asheq/close-buffers.vim'
 Plug 'Quramy/vim-js-pretty-template'
 Plug 'Shougo/neosnippet-snippets'   " large collection of snippets
 Plug 'Shougo/neosnippet.vim'        " snippets
@@ -155,6 +156,9 @@ map <Leader>~ :source ~/.vimrc<CR>
 
 " split into a git blame
 map <Leader>b :Git blame<CR>
+
+" close hidden buffers
+map <Leader>h :Bdelete hidden<CR>
 
 " use netrw tree style listing
 let g:netrw_liststyle=3
