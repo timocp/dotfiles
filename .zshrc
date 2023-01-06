@@ -76,6 +76,7 @@ source $ZSH/oh-my-zsh.sh
 
 typeset -U path
 path+=($HOME/bin)
+path+=($HOME/node_modules/.bin)
 
 # export MANPATH="/usr/local/man:$MANPATH"
 
