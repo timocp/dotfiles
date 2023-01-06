@@ -342,3 +342,7 @@ au FileType yaml set sts=2 sw=2
 packloadall
 " Load all helptags now, after plugins have been loaded
 silent! helptags ALL
+
+" remove unwanted mouse popup menu items
+aunmenu PopUp.-1-
+aunmenu PopUp.How-to\ disable\ mouse
