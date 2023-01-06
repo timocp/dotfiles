@@ -130,6 +130,7 @@ alias lsa="/bin/ls -laN --color=tty"
 alias runningvms="VBoxManage list runningvms"
 alias v=$EDITOR
 alias vrc="$EDITOR ~/.zshrc"
+alias xmlformat="xmllint -format"
 
 sshaws() {
     name=$1
