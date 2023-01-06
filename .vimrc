@@ -194,6 +194,9 @@ nmap <F9> :ALEToggle<cr>
 " Default highlight is unlegible, and I don't like falcon's underlines
 highlight ALEWarning ctermbg=DarkBlue guibg=#330000
 highlight ALEError ctermbg=DarkBlue guibg=#660000
+" highlights for virtualtext of errors
+highlight ALEVirtualTextWarning ctermbg=DarkBlue guibg=#1a0000 guifg=Gray cterm=italic gui=italic
+highlight ALEVirtualTextError ctermbg=DarkBlue guibg=#1a0000 guifg=Gray cterm=italic gui=italic
 
 " fixers
 let g:ale_linters = {
@@ -204,6 +207,8 @@ let g:ale_fixers = {
 \ 'ruby': ['rubocop'],
 \}
 nmap <F8> <Plug>(ale_fix)
+
+let g:ale_ruby_rubocop_executable = 'bundle'
 
 " deoplete config
 let g:deoplete#enable_at_startup = 1
