@@ -7,12 +7,14 @@ set nocompatible
 
 call plug#begin()
 
+Plug 'Asheq/close-buffers.vim'
 Plug 'Quramy/vim-js-pretty-template'
 Plug 'Shougo/neosnippet-snippets'   " large collection of snippets
 Plug 'Shougo/neosnippet.vim'        " snippets
 Plug 'dag/vim-fish'
 Plug 'fatih/vim-go'                 " Go development
 Plug 'fenetikm/falcon'
+Plug 'knsh14/vim-github-link'
 Plug 'mhinz/vim-grepper'
 Plug 'mhinz/vim-signify'            " vcs changes in gutter
 Plug 'rust-lang/rust.vim'
@@ -156,6 +158,9 @@ map <Leader>~ :source ~/.vimrc<CR>
 " split into a git blame
 map <Leader>b :Git blame<CR>
 
+" close hidden buffers
+map <Leader>h :Bdelete hidden<CR>
+
 " use netrw tree style listing
 let g:netrw_liststyle=3
 
@@ -175,6 +180,9 @@ let g:ale_linter_alias = {
 " Enable integration with airline.
 let g:airline#extensions#ale#enabled = 1
 let g:airline#extensions#branch#displayed_head_limit = 20
+
+let g:ale_ruby_rubocop_executable = 'bundle'
+let g:ale_eruby_ruumba_executable = 'bundle'
 
 let g:ale_sign_column_always = 1
 map <Leader>n <Plug>(ale_next_wrap)
@@ -334,3 +342,7 @@ au FileType yaml set sts=2 sw=2
 packloadall
 " Load all helptags now, after plugins have been loaded
 silent! helptags ALL
+
+" remove unwanted mouse popup menu items
+aunmenu PopUp.-1-
+aunmenu PopUp.How-to\ disable\ mouse

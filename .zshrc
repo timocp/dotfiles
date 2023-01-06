@@ -76,6 +76,7 @@ source $ZSH/oh-my-zsh.sh
 
 typeset -U path
 path+=($HOME/bin)
+path+=($HOME/node_modules/.bin)
 
 # export MANPATH="/usr/local/man:$MANPATH"
 
@@ -118,7 +119,8 @@ alias bigthings="du -sk * | sort -n"
 alias feature="git flow feature"
 alias ga="git add"
 alias gb="git blame"
-alias gdc="gd --cached"
+alias gd="gitk &|"
+alias gdc="git diff --cached"
 alias gg="git grep"
 alias gs="git status"
 alias git-snap='git stash store $(git stash create)'
@@ -129,6 +131,7 @@ alias lsa="/bin/ls -laN --color=tty"
 alias runningvms="VBoxManage list runningvms"
 alias v=$EDITOR
 alias vrc="$EDITOR ~/.zshrc"
+alias xmlformat="xmllint -format"
 
 sshaws() {
     name=$1
@@ -149,10 +152,6 @@ sshaws() {
 
 # git aliases
 git config --global alias.co "checkout"
-
-gd() {
-    git diff "$@" | gvim -c "set syntax=diff columns=122 buftype=nowrite" -
-}
 
 vf() {
     $EDITOR $(fzf)
