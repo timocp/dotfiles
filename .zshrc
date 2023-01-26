@@ -71,3 +71,12 @@ esac
 if [ -e ~/.zlocal ]; then
   source ~/.zlocal
 fi
+
+# ASDF runtime manager: https://asdf-vm.com/
+if [ -d ~/.asdf ]; then
+  source ~/.asdf/asdf.sh
+  # append completions to fpath
+  fpath=(${ASDF_DIR}/completions $fpath)
+  # initialise completions with ZSH's compinit
+  autoload -Uz compinit && compinit
+fi
