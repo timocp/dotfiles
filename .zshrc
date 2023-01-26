@@ -19,3 +19,54 @@ precmd() { vcs_info }
 zstyle ':vcs_info:git:*' formats ' %F{8}[%f%F{3}%b%f%F{8}]%f'
 setopt PROMPT_SUBST
 PROMPT='%F{8}[%f%F{8}%T%f%F{8}]%f %F{8}[%f%F{14}%~%f%F{8}]%f${vcs_info_msg_0_} %F{8}(%f%F{9}%?%f%F{8})%f%F{11}%#%f '
+
+# environment
+export LC_COLLATE=C
+export LESS="-aMiqRsS -j 5"
+export PAGER=less
+
+if command -v nvim &> /dev/null; then
+  export EDITOR=nvim
+elif command -v vim &> /dev/null; then
+  export EDITOR=vim
+else
+  export EDITOR=vi
+fi
+
+# aliases
+alias ..="cd .."
+alias .rc="source ~/.zshrc"
+alias be="bundle exec"
+alias bigthings="du -sk * | sort -n"
+alias gg="git grep"
+alias gs="git status"
+alias git-snap='git stash store $(git stash create)'
+alias runningvms="VBoxManage list runningvms"
+alias v=$EDITOR
+alias vrc="$EDITOR ~/.zshrc"
+alias xmlformat="xmllint -format"
+
+# OS specifics
+case "$OSTYPE" in
+  linux*)
+    alias l="/bin/ls -N --color=tty"
+    alias la="/bin/ls -aN --color=tty"
+    alias ls="/bin/ls -lN --color=tty"
+    alias lsa="/bin/ls -alN --color=tty"
+    ;;
+  Darwin*)
+    export LSCOLORS=gxfxcxdxbxegedabagacad
+    alias l="/bin/ls -G"
+    alias la="/bin/ls -aG"
+    alias ls="/bin/ls -lG"
+    alias lsa="/bin/ls -alG"
+    ;;
+  *)
+    echo "zshrc: Unhandled OS: $OSTYPE"
+    ;;
+esac
+
+# get local (eg, work/home specific) aliases and other things
+if [ -e ~/.zlocal ]; then
+  source ~/.zlocal
+fi
