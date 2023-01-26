@@ -15,10 +15,11 @@ compinit
 # Path with version control info
 autoload -Uz vcs_info
 precmd() { vcs_info }
+sep='%F{8}|%f'
 # Format the vcs_info_msg_0_ variable
-zstyle ':vcs_info:git:*' formats ' %F{8}[%f%F{3}%b%f%F{8}]%f'
+zstyle ':vcs_info:git:*' formats "%F{3}%b%f${sep}"
 setopt PROMPT_SUBST
-PROMPT='%F{8}[%f%F{10}%n%f@%F{10}%m%f%F{8}]%f %F{8}[%f%F{8}%T%f%F{8}]%f %F{8}[%f%F{14}%~%f%F{8}]%f${vcs_info_msg_0_} %F{8}(%f%F{9}%?%f%F{8})%f%F{11}%#%f '
+PROMPT='%F{10}%n%f%F{8}@%f%F{10}%m%f${sep}%F{12}%T%f${sep}%F{14}%~%f${sep}${vcs_info_msg_0_}%F{9}%?%f%F{11}%#%f '
 
 # environment
 export LC_COLLATE=C
