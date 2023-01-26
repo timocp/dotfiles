@@ -18,7 +18,7 @@ precmd() { vcs_info }
 # Format the vcs_info_msg_0_ variable
 zstyle ':vcs_info:git:*' formats ' %F{8}[%f%F{3}%b%f%F{8}]%f'
 setopt PROMPT_SUBST
-PROMPT='%F{8}[%f%F{8}%T%f%F{8}]%f %F{8}[%f%F{14}%~%f%F{8}]%f${vcs_info_msg_0_} %F{8}(%f%F{9}%?%f%F{8})%f%F{11}%#%f '
+PROMPT='%F{8}[%f%F{10}%n%f@%F{10}%m%f%F{8}]%f %F{8}[%f%F{8}%T%f%F{8}]%f %F{8}[%f%F{14}%~%f%F{8}]%f${vcs_info_msg_0_} %F{8}(%f%F{9}%?%f%F{8})%f%F{11}%#%f '
 
 # environment
 export LC_COLLATE=C
