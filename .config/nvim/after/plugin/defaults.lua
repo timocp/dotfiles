@@ -4,6 +4,8 @@ vim.o.splitbelow = true
 
 vim.g.netrw_liststyle = 3
 
+require('nvim-tree').setup()
+
 -- colour scheme overrides
 --------------------------
 
@@ -29,6 +31,7 @@ vim.keymap.set('n', '<leader>b', "<cmd>Git blame<cr>", { desc = 'Git blame' })
 vim.keymap.set('n', ';', require('telescope.builtin').buffers, { desc = 'Find existing buffers' })
 vim.keymap.set('', 'Q', "gq", { desc = 'Wrap text' })
 
-vim.keymap.set('n', '<F2>', "<cmd>Explore<cr>", { desc = 'Open explorer' })
-vim.keymap.set('n', '<F3>', "<cmd>Sexplore<cr>", { desc = 'Split open explorer' })
+vim.keymap.set('', '<F2>', function () vim.cmd[[NvimTreeToggle]] end, { desc = 'Toggle Tree' })
+vim.keymap.set('', '<F3>', function () vim.cmd[[NvimTreeFocus]] end, { desc = 'Focus Tree' })
+
 vim.keymap.set('n', '<F6>', function () vim.cmd [[exe "!gitk " . shellescape(expand("%")) . " &"]] end, { desc = 'Run gitk' })
