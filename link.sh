@@ -5,7 +5,8 @@
 cd $(dirname $0)
 for f in $(find . -type f -not -name $(basename $0) -a -not -name LICENSE | sed 's/^\.\///' | grep -v '^.git/'); do
     if [ -e $HOME/$f -a ! -h $HOME/$f ]; then
-        echo -n "Overwrite regular file $HOME/$f (y/n)? "
+        diff -u "$HOME/$f" "$f"
+        printf "Replace regular file %s with symlink (y/n)? " "$HOME/$f"
         read answer
         if echo "$answer" | grep -iq "^y"; then
             rm -f $HOME/$f
