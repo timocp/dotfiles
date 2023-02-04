@@ -85,6 +85,6 @@ elif [ -d ~/.asdf ]; then
   autoload -Uz compinit && compinit
 fi
 
-if [ -f $HOME/.docker/init-zsh.sh]; then
+if [ -f $HOME/.docker/init-zsh.sh ]; then
   source $HOME/.docker/init-zsh.sh # Added by Docker Desktop
 fi
