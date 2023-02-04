@@ -57,8 +57,8 @@ case "$OSTYPE" in
     alias ls="/bin/ls -lN --color=tty"
     alias lsa="/bin/ls -alN --color=tty"
     ;;
-  Darwin*)
-    export LSCOLORS=gxfxcxdxbxegedabagacad
+  darwin*)
+    export LSCOLORS=gxfxcxdxbxegedabagacad  # default except for cyan directories
     alias l="/bin/ls -G"
     alias la="/bin/ls -aG"
     alias ls="/bin/ls -lG"
