@@ -1,3 +1,9 @@
+vim.o.cmdheight = 2
+vim.o.expandtab = true
+vim.o.splitbelow = true
+
+vim.g.netrw_liststyle = 3
+
 -- colour scheme overrides
 --------------------------
 
@@ -12,3 +18,17 @@ vim.cmd [[highlight DiagnosticVirtualTextInfo gui=italic]]
 -- replace underlines with subtle red background (was SpellBad, SpellCap)
 vim.cmd [[highlight ALEError guibg=#660000]]
 vim.cmd [[highlight ALEWarning guibg=#440000]]
+
+-- mappings
+-----------
+
+vim.keymap.set('n', '<C-p>', require('telescope.builtin').find_files, { desc = 'Search Files' })
+
+vim.keymap.set('n', '<leader>b', "<cmd>Git blame<cr>", { desc = 'Git blame' })
+
+vim.keymap.set('n', ';', require('telescope.builtin').buffers, { desc = 'Find existing buffers' })
+vim.keymap.set('', 'Q', "gq", { desc = 'Wrap text' })
+
+vim.keymap.set('n', '<F2>', "<cmd>Explore<cr>", { desc = 'Open explorer' })
+vim.keymap.set('n', '<F3>', "<cmd>Sexplore<cr>", { desc = 'Split open explorer' })
+vim.keymap.set('n', '<F6>', function () vim.cmd [[exe "!gitk " . shellescape(expand("%")) . " &"]] end, { desc = 'Run gitk' })
