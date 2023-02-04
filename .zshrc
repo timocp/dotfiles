@@ -84,3 +84,7 @@ elif [ -d ~/.asdf ]; then
   # initialise completions with ZSH's compinit
   autoload -Uz compinit && compinit
 fi
+
+if [ -f $HOME/.docker/init-zsh.sh]; then
+  source $HOME/.docker/init-zsh.sh # Added by Docker Desktop
+fi
