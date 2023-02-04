@@ -75,7 +75,9 @@ if [ -e ~/.zlocal ]; then
 fi
 
 # ASDF runtime manager: https://asdf-vm.com/
-if [ -d ~/.asdf ]; then
+if [ -d /opt/homebrew/opt/asdf ]; then
+  source /opt/homebrew/opt/asdf/libexec/asdf.sh
+elif [ -d ~/.asdf ]; then
   source ~/.asdf/asdf.sh
   # append completions to fpath
   fpath=(${ASDF_DIR}/completions $fpath)
