@@ -32,6 +32,6 @@ vim.keymap.set('n', ';', require('telescope.builtin').buffers, { desc = 'Find ex
 vim.keymap.set('', 'Q', "gq", { desc = 'Wrap text' })
 
 vim.keymap.set('', '<F2>', function () vim.cmd[[NvimTreeToggle]] end, { desc = 'Toggle Tree' })
-vim.keymap.set('', '<F3>', function () vim.cmd[[NvimTreeFocus]] end, { desc = 'Focus Tree' })
+vim.keymap.set('', '<F3>', function () vim.cmd[[NvimTreeFindFile]] end, { desc = 'File current file in Tree' })
 
 vim.keymap.set('n', '<F6>', function () vim.cmd [[exe "!gitk " . shellescape(expand("%")) . " &"]] end, { desc = 'Run gitk' })
