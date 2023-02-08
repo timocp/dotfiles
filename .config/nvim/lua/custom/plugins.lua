@@ -15,4 +15,7 @@ return function(use)
     },
     tag = 'nightly' -- optional, updated every week. (see issue #1193 - this is actually the stable branch)
   }
+
+  -- buffer deletion
+  use 'Asheq/close-buffers.vim'
 end

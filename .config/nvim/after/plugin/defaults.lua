@@ -35,3 +35,6 @@ vim.keymap.set('', '<F2>', function () vim.cmd[[NvimTreeToggle]] end, { desc = '
 vim.keymap.set('', '<F3>', function () vim.cmd[[NvimTreeFindFile]] end, { desc = 'File current file in Tree' })
 
 vim.keymap.set('n', '<F6>', function () vim.cmd [[exe "!gitk " . shellescape(expand("%")) . " &"]] end, { desc = 'Run gitk' })
+
+vim.keymap.set('', '<leader>hd', function () vim.cmd[[Bdelete hidden]] end, { desc = 'Delete hidden buffers' })
+vim.keymap.set('', '<leader>hh', function () vim.cmd[[Bdelete menu]] end, { desc = 'Buffer deletion menu' })
