@@ -64,6 +64,7 @@ case "$OSTYPE" in
     alias la="/bin/ls -aG"
     alias ls="/bin/ls -lG"
     alias lsa="/bin/ls -alG"
+    alias top=htop
     ;;
   *)
     echo "zshrc: Unhandled OS: $OSTYPE"
