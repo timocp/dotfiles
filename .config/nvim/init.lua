@@ -247,6 +247,7 @@ require('telescope').setup {
         ['<C-d>'] = false,
       },
     },
+    layout_strategy = 'vertical',
   },
 }
 
