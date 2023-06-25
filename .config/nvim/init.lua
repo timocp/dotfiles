@@ -177,6 +177,9 @@ require('lazy').setup({
   },
 
   { 'Asheq/close-buffers.vim' },
+
+  -- Links to github
+  { 'knsh14/vim-github-link' },
 }, {})
 
 -- [[ Setting options ]]
@@ -297,6 +300,8 @@ vim.keymap.set('', 'Q', "gq", { desc = 'Wrap text' })
 
 vim.keymap.set('', '<leader>hd', function () vim.cmd[[Bdelete hidden]] end, { desc = 'Delete hidden buffers' })
 vim.keymap.set('', '<leader>hh', function () vim.cmd[[Bdelete menu]] end, { desc = 'Buffer deletion menu' })
+
+vim.keymap.set('n', '<leader>hl', function () vim.cmd[[GetCurrentBranchLink]] end, { desc = 'Get link to selected line(s) on github' })
 
 vim.keymap.set('', '<F2>', function () vim.cmd[[NvimTreeToggle]] end, { desc = 'Toggle Tree' })
 vim.keymap.set('', '<F3>', function () vim.cmd[[NvimTreeFindFile]] end, { desc = 'File current file in Tree' })
