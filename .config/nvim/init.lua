@@ -175,6 +175,8 @@ require('lazy').setup({
       require("nvim-tree").setup {}
     end,
   },
+
+  { 'Asheq/close-buffers.vim' },
 }, {})
 
 -- [[ Setting options ]]
@@ -292,6 +294,9 @@ vim.keymap.set('n', ';', function () require('telescope.builtin').buffers({ sort
 vim.keymap.set('n', '<leader>b', "<cmd>Git blame<cr>", { desc = 'Git blame' })
 
 vim.keymap.set('', 'Q', "gq", { desc = 'Wrap text' })
+
+vim.keymap.set('', '<leader>hd', function () vim.cmd[[Bdelete hidden]] end, { desc = 'Delete hidden buffers' })
+vim.keymap.set('', '<leader>hh', function () vim.cmd[[Bdelete menu]] end, { desc = 'Buffer deletion menu' })
 
 vim.keymap.set('', '<F2>', function () vim.cmd[[NvimTreeToggle]] end, { desc = 'Toggle Tree' })
 vim.keymap.set('', '<F3>', function () vim.cmd[[NvimTreeFindFile]] end, { desc = 'File current file in Tree' })
