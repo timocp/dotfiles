@@ -165,6 +165,9 @@ require('lazy').setup({
     build = ':TSUpdate',
   },
 
+  -- treesitter playground for :TSPlaygroundToggle
+  { 'nvim-treesitter/playground' },
+
   {
     "nvim-tree/nvim-tree.lua",
     version = "*",
