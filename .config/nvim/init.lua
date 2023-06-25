@@ -234,7 +234,7 @@ vim.o.timeout = true
 vim.o.timeoutlen = 300
 
 -- Set completeopt to have a better completion experience
-vim.o.completeopt = 'menuone,noselect'
+vim.o.completeopt = 'menu,menuone,noselect,noinsert'
 
 -- NOTE: You should make sure your terminal supports this
 vim.o.termguicolors = true
@@ -508,8 +508,7 @@ cmp.setup {
     ['<C-f>'] = cmp.mapping.scroll_docs(4),
     ['<C-Space>'] = cmp.mapping.complete {},
     ['<CR>'] = cmp.mapping.confirm {
-      behavior = cmp.ConfirmBehavior.Replace,
-      select = true,
+      select = false,
     },
     -- disabled for now as copilot wants tab:
     -- ['<Tab>'] = cmp.mapping(function(fallback)
