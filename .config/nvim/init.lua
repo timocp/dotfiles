@@ -175,7 +175,13 @@ require('lazy').setup({
       "nvim-tree/nvim-web-devicons",
     },
     config = function()
-      require("nvim-tree").setup {}
+      require("nvim-tree").setup({
+        actions = {
+          open_file = {
+            resize_window = false,
+          },
+        },
+      })
     end,
   },
 
