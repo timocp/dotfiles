@@ -4,6 +4,10 @@
 vim.g.mapleader = ','
 vim.g.maplocalleader = ','
 
+-- disable netrw at the very start of your init.lua when using nvim-tree
+vim.g.loaded_netrw = 1
+vim.g.loaded_netrwPlugin = 1
+
 -- Install package manager
 --    https://github.com/folke/lazy.nvim
 --    `:help lazy.nvim.txt` for more info
@@ -160,6 +164,17 @@ require('lazy').setup({
     },
     build = ':TSUpdate',
   },
+
+  {
+    "nvim-tree/nvim-tree.lua",
+    version = "*",
+    dependencies = {
+      "nvim-tree/nvim-web-devicons",
+    },
+    config = function()
+      require("nvim-tree").setup {}
+    end,
+  },
 }, {})
 
 -- [[ Setting options ]]
@@ -277,6 +292,9 @@ vim.keymap.set('n', ';', function () require('telescope.builtin').buffers({ sort
 vim.keymap.set('n', '<leader>b', "<cmd>Git blame<cr>", { desc = 'Git blame' })
 
 vim.keymap.set('', 'Q', "gq", { desc = 'Wrap text' })
+
+vim.keymap.set('', '<F2>', function () vim.cmd[[NvimTreeToggle]] end, { desc = 'Toggle Tree' })
+vim.keymap.set('', '<F3>', function () vim.cmd[[NvimTreeFindFile]] end, { desc = 'File current file in Tree' })
 
 vim.keymap.set('n', '<F6>', function () vim.cmd [[exe "!gitk " . shellescape(expand("%")) . " &"]] end, { desc = 'Run gitk' })
 
