@@ -189,6 +189,9 @@ require('lazy').setup({
 
   -- Links to github
   { 'knsh14/vim-github-link' },
+
+  -- Better % operator
+  { 'andymass/vim-matchup' },
 }, {})
 
 -- [[ Setting options ]]
@@ -381,6 +384,9 @@ require('nvim-treesitter.configs').setup {
         ['<leader>A'] = '@parameter.inner',
       },
     },
+  },
+  matchup = {
+    enable = true,
   },
 }
 
