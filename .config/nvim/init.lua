@@ -93,11 +93,12 @@ require('lazy').setup({
   },
 
   {
-    -- Theme inspired by Atom
-    'navarasu/onedark.nvim',
+    -- Nightfox colourscheme
+    'EdenEast/nightfox.nvim',
     priority = 1000,
     config = function()
-      vim.cmd.colorscheme 'onedark'
+      -- carboxfox is the darkest variant
+      vim.cmd.colorscheme 'carbonfox'
     end,
   },
 
