@@ -249,6 +249,8 @@ vim.o.cursorline = true
 
 vim.o.scrolloff = 2
 
+vim.o.wildmode = 'longest,list'
+
 vim.g.netrw_liststyle = 3
 
 -- Don't try to use copilot in telescope windows
