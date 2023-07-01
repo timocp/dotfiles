@@ -251,6 +251,11 @@ vim.o.scrolloff = 2
 
 vim.g.netrw_liststyle = 3
 
+-- Don't try to use copilot in telescope windows
+vim.g.copilot_filetypes = {
+  TelescopePrompt = false,
+}
+
 -- [[ Basic Keymaps ]]
 
 -- Keymaps for better default experience
@@ -547,6 +552,10 @@ cmp.setup {
     { name = 'luasnip' },
   },
 }
+
+-- highlighting overrides
+
+vim.cmd [[highlight CopilotSuggestion guibg=#003300]]
 
 -- macros
 -- @t swap ' strings for "
