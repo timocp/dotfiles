@@ -195,6 +195,17 @@ require('lazy').setup({
 
   -- copilot; on first use, run :Copilot setup
   { 'github/copilot.vim' },
+
+  -- ALE linter only enabled on :ALEEnable
+  -- Maybe heading towards LSP or nvim-lint instead
+  {
+    'dense-analysis/ale',
+    cmd = "ALEEnable",
+    config = function ()
+      vim.cmd [[highlight link ALEVirtualTextWarning DiagnosticVirtualTextWarn]]
+      vim.cmd [[highlight link ALEVirtualTextInfo DiagnosticVirtualTextInfo]]
+    end,
+  },
 }, {})
 
 -- [[ Setting options ]]
