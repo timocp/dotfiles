@@ -560,8 +560,14 @@ cmp.setup {
 vim.cmd [[highlight CopilotSuggestion guibg=#003300]]
 
 -- macros
+
 -- @t swap ' strings for "
 vim.fn.setreg('t', 'r"f\'r"')
+
+-- commands
+
+-- change to directory of current file
+vim.cmd [[command! -nargs=0 CD execute 'cd' expand('%:p:h')]]
 
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et
